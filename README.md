@@ -3,4 +3,7 @@
 
 # Test opgave
 ## Screenshot af mine egne unit-tests
-![alt text](image.png)
+![alt text](./assets/image.png)
+
+## Screenshot af tests der kører i mit eget repo
+![alt text](./assets/image-1.png)
