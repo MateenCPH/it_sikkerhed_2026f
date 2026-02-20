@@ -137,5 +137,74 @@ I et login system kan **ækvivalens klasser** bruges til at opdele password inpu
 **Ækvivalens klasser** eksemplet og **grænseværdi test** ville jeg placere under Code / Dev gate da det er input validation. <br/>
 **CRUD(L)** test eksemplet ville jeg placere under Integration securty gaten, da vi tester integration mellem systemer. Vi tester om applikationen har kommunikation til databasen som højst sandsynligt ligger på en server - derfor integration mellem systemer. Derudover tester går den også lidt under system security gates da vi tester på, om brugere / roller **kun kan det de skal** samt token håndtering.<br/>
 **Cycle process test** vil jeg mene er lidt over det hele i security gates. Her tester vi jo et helt flow igennem systemet, som berører mange funktioner og tests som ydermere går ind under flere security gates. Vil mene at den går hele vejen fra Code / Dev -> Integration -> System security gates. <br/>
-Det er lidt samme historie med **decision table test**. Den dækker også over en række funktioner og tests som løber over flere gates (som beskrevet ovenfor med cycle process test).
+Det er lidt samme historie med **decision table test**. Den dækker også over en række funktioner og tests som løber over flere gates (som beskrevet ovenfor med cycle process test).<br/>
 
+# Dag 3, datafil og hashing
+## Datafil opgave - design af test cases
+### Ækvivalensklasser
+| Funktion        | Gyldight input      | Ugyldigt input                          |
+|-----------------|---------------------|-----------------------------------------|
+| create_user     | alle felter udfyldt | manglende felter, duplicate ID          |
+| get_user(id)    | eksisterende user   | non-eksisterende user, negativt id      |
+| update_user     | gyldig ændring      | ugyldigt felt, ikke-eksisterende bruger |
+| delete_user(id) | eksisterende user   | non-eksisterende user, negativt id      |
+
+### CRUD(L)
+**Create** - systemet skal kunne oprette users <br/>
+**Read** - systemet skal kunne læse brugere via ID <br/>
+**Update** - systemet skal kunne redigere i brugerinformationer <br/>
+**Delete** - systemet skal kunne slette brugere <br/>
+
+### Funktioner min DB skal have:
+**CRUD-operationer:**<br/> 
+def create_user(person_id, first_name, last_name, address, street_number, <br/> password, enabled=True)<br/> 
+def get_user(person_id)<br/> 
+def get_all_users()<br/> 
+def update_user(person_id, **fields)<br/> 
+def delete_user(person_id)<br/>
+
+**Persistens:**<br/> 
+def save_to_file()<br/> 
+def load_from_file()<br/>
+
+
+# Dag 4
+## Diskussion
+![alt text](./assets/blackhat.png)
+1 Styringen af selvkørende biler
+Folk ville ikke være i stand til at bruge ders bil som transportmiddel længere, da der er chance for at bilen kører et helt andet sted hen eller værre dræber passageren ved at køre ind i en mur. Der ville være mindre sikkerhed på gaderne.
+
+
+2 En landsdækkende sundhedsplatform
+Hvis sundhed.dk blev hacket ville ingen danske borgere få adgang til deres patientdata. Derimod ville al patientdata blive lækket hvilket er følsomt data. Danskerne ville have mistillid til platformen, da journaler kan være ændret. Ændrede journaler betyder forkert behandling og risiko for tabte liv.
+
+
+3 Fortrolige videokonferencer
+Hvis kineserne fik adgang til ethvert EU lands fortrolige videokonferencer, havde det været meget kritisk. Der havde været en del industrispionage, politisk manipulation og læk af en masse forretningshemmeligheder.
+
+
+4 Styringen af ubemandede militærdroner
+Civil: I det store billede ville folk dø. De ville nok ikke dræbe folk direkte, men deres targets havde været militære/civile mål såsom hospitaler, supermarkeder, skoler osv.
+Militær: Alvorlige kriser ifm. krig. Soldater ville dø.
+
+
+5 Folketingets dokumentbase
+Alle statshemmeligheder ville blive lækket, hvilket spreder sig i det pågældende land og kan skabe oprør. Kan medføre regime fald.
+
+
+6 Styringen af sateliter
+
+## CVSS (Common Vulnerability Scoring System) - Lav en 0.0 og en 10.0 score
+### Attack Vector
+Hvordan skal jeg hacke dig? Er det nok med at jeg har en bruger på din PC, eller skal jeg fysisk gøre noget?
+
+### Attack Complexity
+Hvor svært er det at hacke dig? Er det nemt eller svært?
+
+### Privilleges required
+Er der brug for elevation for at udføre commands eller til visse sårbare applikationer?
+
+### User Interaction (UI)
+Er der nødvendighed for at brugeren skal gøre noget på PC'en?
+
+## SDLC
